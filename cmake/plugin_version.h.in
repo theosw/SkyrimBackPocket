@@ -1,0 +1,19 @@
+#pragma once
+
+#include <RE/Skyrim.h>
+
+#include <string_view>
+
+namespace back_pocket::plugin_version {
+using namespace std::literals;
+
+inline constexpr REL::Version version{
+    @PROJECT_VERSION_MAJOR@u,
+    @PROJECT_VERSION_MINOR@u,
+    @PROJECT_VERSION_PATCH@u,
+};
+inline constexpr REL::Version supported_runtime{1u, 6u, 1170u, 0u};
+inline constexpr auto name = "@PROJECT_NAME@"sv;
+inline constexpr auto version_string = "@PROJECT_VERSION@"sv;
+}  // namespace back_pocket::plugin_version
+

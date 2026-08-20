@@ -1,0 +1,13 @@
+/build/
+/build-*/
+/.vs/
+/Learning Sources/
+/.tools/
+/dist/
+/docs/NEXUS_PAGE_DRAFT.md
+
+*.user
+*.suo
+
+/package/BackPocket/SKSE/Plugins/BackPocket.dll
+/package/BackPocket/SKSE/Plugins/BackPocket.pdb

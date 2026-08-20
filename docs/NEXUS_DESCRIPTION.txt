@@ -1,0 +1,56 @@
+Some items live in your inventory forever: quest tools, utility armor, dolls, containers, bags of holding, and mod-added gadgets you never intend to sell or drop. They are useful, but they clutter the inventory you actually browse.
+
+[b]Back Pocket gives those items a place of their own.[/b]
+
+Highlight an item and press [b]B[/b]. It will disappear from SkyUI's regular categories and appear in an always-visible [b]Back Pocket[/b] category. The item remains owned and usable—only its place in the inventory menu changes.
+
+[size=5][b]FEATURES[/b][/size]
+
+[list]
+[*]A dedicated category integrated directly into SkyUI.
+[*]Pocket membership stored separately for each save.
+[*]SkyUI's normal search, sorting, scrolling, and mixed-item layout.
+[*]An isolated satchel icon that does not replace your current icon pack.
+[*]The same player-side organization while storing, selling, or giving items.
+[*]No ESP, ESL, or Papyrus scripts.
+[/list]
+
+[size=5][b]CONTROLS[/b][/size]
+
+[b]B[/b] moves the highlighted item into or out of Back Pocket. The key can be changed using a DirectInput scan code in:
+
+[code]Data\SKSE\Plugins\BackPocket.ini[/code]
+
+The same file contains an optional shortcut for switching between Back Pocket and your last regular category. Set [code]toggle_view_scan_code=47[/code] for [b]V[/b]; leave it at [code]0[/code] to keep it disabled.
+
+[size=5][b]REQUIREMENTS[/b][/size]
+
+[list]
+[*]Skyrim Steam runtime [b]1.6.1170[/b].
+[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/30379]SKSE64 2.2.6[/url].
+[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/32444]Address Library for SKSE Plugins[/url].
+[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/12604]SkyUI 6.11[/url].
+[*][url=https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist]Microsoft Visual C++ Redistributable (x64)[/url].
+[/list]
+
+[size=5][b]INSTALLATION & COMPATIBILITY[/b][/size]
+
+Install with Mod Organizer 2 or Vortex. No special conflict rules should be required because Back Pocket does not replace item-menu SWFs or your category icon pack.
+
+[b]LoreRim is not required.[/b] Back Pocket was developed and tested with LoreRim, Aura's Inventory Tweaks, and Norden UI.
+
+[size=5][b]LIMITATIONS[/b][/size]
+
+[list]
+[*]Back Pocket appears in the main inventory and on the player side of container, barter, and gift menus. External inventories and crafting menus are unchanged.
+[*]Membership is tracked by base form, so stacks or variants sharing a base form share their pocket state.
+[*]Pocketing currently requires a keyboard; controllers can still navigate to the category.
+[/list]
+
+[size=5][b]UNINSTALLATION[/b][/size]
+
+Back Pocket never moves or deletes items. Disable the plugin and every pocketed item will appear normally again. Keeping a backup save before changing native plugins is still recommended.
+
+[size=5][b]CREDITS[/b][/size]
+
+Thanks to the [url=https://www.nexusmods.com/skyrimspecialedition/mods/30379]SKSE[/url] and [url=https://www.nexusmods.com/skyrimspecialedition/mods/12604]SkyUI[/url] teams, [url=https://github.com/CharmedBaryon/CommonLibSSE-NG]CommonLibSSE-NG[/url], and [url=https://www.nexusmods.com/skyrimspecialedition/mods/186759]Pick Up As Junk[/url], whose MIT-licensed implementation informed parts of the initial development. Back Pocket is released under the MIT License.
