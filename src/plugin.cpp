@@ -72,9 +72,10 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Load(const SKSE::LoadInterface* sks
                back_pocket::plugin_version::version_string);
 
   const REL::Version runtime = skse->RuntimeVersion();
-  if (runtime != back_pocket::plugin_version::supported_runtime) {
-    logger::critical("unsupported Skyrim runtime {}; this build requires {}", runtime,
-                     back_pocket::plugin_version::supported_runtime);
+  if (!back_pocket::plugin_version::supports_runtime(runtime)) {
+    logger::critical("unsupported Skyrim runtime {}; this build supports {} and {}", runtime,
+                     back_pocket::plugin_version::se_runtime,
+                     back_pocket::plugin_version::ae_runtime);
     return false;
   }
 
@@ -96,7 +97,8 @@ extern "C" DLLEXPORT constinit auto SKSEPlugin_Version = []() noexcept {
   SKSE::PluginVersionData version;
   version.PluginName(back_pocket::plugin_version::name.data());
   version.PluginVersion(back_pocket::plugin_version::version);
-  version.CompatibleVersions({back_pocket::plugin_version::supported_runtime});
+  version.CompatibleVersions(
+      {back_pocket::plugin_version::se_runtime, back_pocket::plugin_version::ae_runtime});
   version.HasNoStructUse();
   return version;
 }();
@@ -106,5 +108,5 @@ extern "C" DLLEXPORT bool SKSEAPI SKSEPlugin_Query(const SKSE::QueryInterface* s
   plugin_info->name = SKSEPlugin_Version.pluginName;
   plugin_info->infoVersion = SKSE::PluginInfo::kVersion;
   plugin_info->version = SKSEPlugin_Version.pluginVersion;
-  return skse->RuntimeVersion() == back_pocket::plugin_version::supported_runtime;
+  return back_pocket::plugin_version::supports_runtime(skse->RuntimeVersion());
 }

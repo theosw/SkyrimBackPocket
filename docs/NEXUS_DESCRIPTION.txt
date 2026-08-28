@@ -12,24 +12,31 @@ Highlight an item and press [b]B[/b]. It will disappear from SkyUI's regular cat
 [*]SkyUI's normal search, sorting, scrolling, and mixed-item layout.
 [*]An isolated satchel icon that does not replace your current icon pack.
 [*]The same player-side organization while storing, selling, or giving items.
+[*]A native SkyUI footer action with keyboard and controller glyphs.
 [*]No ESP, ESL, or Papyrus scripts.
 [/list]
 
 [size=5][b]CONTROLS[/b][/size]
 
-[b]B[/b] moves the highlighted item into or out of Back Pocket. The key can be changed using a DirectInput scan code in:
+[b]B[/b] moves the highlighted item into or out of Back Pocket. [b]Left Trigger[/b] is the default controller action. Inventory, container, barter, and gift menus show [b]Pocket[/b] or [b]Unpocket[/b] in SkyUI's native footer and switch the displayed glyph with the active input device.
+
+The bindings can be changed in:
 
 [code]Data\SKSE\Plugins\BackPocket.ini[/code]
 
+The keyboard action uses a DirectInput scan code. The controller action uses a SkyUI gamepad key code; [code]280[/code] is LT and [code]-1[/code] disables it. LT is free in LoreRim's Keyboard Friendly and Complete Controller item-menu layouts. Pick Up As Junk uses the same default, and Gamepad++ assigns LT to Left Equip, so users combining those bindings must rebind or disable one of them.
+
 The same file contains an optional shortcut for switching between Back Pocket and your last regular category. Set [code]toggle_view_scan_code=47[/code] for [b]V[/b]; leave it at [code]0[/code] to keep it disabled.
+
+Pocket actions are suppressed while typing in SkyUI's search field, using an internal item dialog, or viewing the Console over an item menu.
 
 [size=5][b]REQUIREMENTS[/b][/size]
 
 [list]
-[*]Skyrim Steam runtime [b]1.6.1170[/b].
-[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/30379]SKSE64 2.2.6[/url].
-[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/32444]Address Library for SKSE Plugins[/url].
-[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/12604]SkyUI 6.11[/url].
+[*]Skyrim Steam runtime [b]1.5.97[/b] or [b]1.6.1170[/b].
+[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/30379]SKSE64[/url]: 2.0.20 for Skyrim 1.5.97 or 2.2.6 for Skyrim 1.6.1170.
+[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/32444]Address Library for SKSE Plugins[/url], using the package that matches your game runtime.
+[*][url=https://www.nexusmods.com/skyrimspecialedition/mods/12604]SkyUI[/url] or a compatible SkyUI-based inventory overhaul.
 [*][url=https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist]Microsoft Visual C++ Redistributable (x64)[/url].
 [/list]
 
@@ -39,12 +46,14 @@ Install with Mod Organizer 2 or Vortex. No special conflict rules should be requ
 
 [b]LoreRim is not required.[/b] Back Pocket was developed and tested with LoreRim, Aura's Inventory Tweaks, and Norden UI.
 
+[b]Quick Item Transfer:[/b] Back Pocket detects QIT dynamically and hides unsupported transfer actions for Back Pocket and the undefined index SkyUI produces when switching to the container side. QIT continues to work normally in its supported categories, and no QIT files are replaced.
+
 [size=5][b]LIMITATIONS[/b][/size]
 
 [list]
 [*]Back Pocket appears in the main inventory and on the player side of container, barter, and gift menus. External inventories and crafting menus are unchanged.
 [*]Membership is tracked by base form, so stacks or variants sharing a base form share their pocket state.
-[*]Pocketing currently requires a keyboard; controllers can still navigate to the category.
+[*]Back Pocket observes configured inputs without consuming other actions assigned to the same key.
 [/list]
 
 [size=5][b]UNINSTALLATION[/b][/size]

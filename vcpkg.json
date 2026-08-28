@@ -4,7 +4,6 @@
   "version-semver": "0.1.0",
   "dependencies": [
     "catch2",
-    "rapidcsv",
     "spdlog"
   ],
   "builtin-baseline": "1dc5ee30eb1032221d29f281f4a94b73f06b4284"

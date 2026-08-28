@@ -8,7 +8,7 @@
   "configurePresets": [
     {
       "name": "ae",
-      "displayName": "Skyrim AE 1.6.1170",
+      "displayName": "Skyrim SE/AE 1.5.97 + 1.6.1170",
       "generator": "Visual Studio 17 2022",
       "architecture": "x64",
       "binaryDir": "${sourceDir}/build",
@@ -46,4 +46,3 @@
     }
   ]
 }
-

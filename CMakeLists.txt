@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.24)
 
-project(BackPocket VERSION 0.1.0 LANGUAGES CXX)
+project(BackPocket VERSION 0.2.1 LANGUAGES CXX)
 
 option(BACK_POCKET_BUILD_TESTS "Build Back Pocket unit tests" ON)
 
@@ -11,8 +11,8 @@ set(CMAKE_INTERPROCEDURAL_OPTIMIZATION_RELEASE ON)
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 set(BUILD_TESTS OFF CACHE BOOL "Disable CommonLibSSE tests" FORCE)
-set(ENABLE_SKYRIM_AE ON CACHE BOOL "Build for Skyrim AE" FORCE)
-set(ENABLE_SKYRIM_SE OFF CACHE BOOL "Do not build the Skyrim 1.5.97 target" FORCE)
+set(ENABLE_SKYRIM_AE ON CACHE BOOL "Build for Skyrim AE 1.6.1170" FORCE)
+set(ENABLE_SKYRIM_SE ON CACHE BOOL "Build for Skyrim SE 1.5.97" FORCE)
 set(ENABLE_SKYRIM_VR OFF CACHE BOOL "Do not build the Skyrim VR target" FORCE)
 set(SKSE_SUPPORT_XBYAK OFF CACHE BOOL "Back Pocket does not use Xbyak" FORCE)
 
@@ -54,8 +54,13 @@ add_library(
   back_pocket_core
   STATIC
   include/back_pocket/category_policy.h
+  include/back_pocket/form_id_policy.h
+  include/back_pocket/input_binding.h
   include/back_pocket/pocket.h
+  include/back_pocket/quick_item_transfer_policy.h
   include/back_pocket/saved_state.h
+  include/back_pocket/tab_transition_policy.h
+  src/input_binding.cpp
   src/pocket.cpp
   src/saved_state.cpp
 )
@@ -70,6 +75,8 @@ add_library(
   src/config.h
   src/inventory_filter.cpp
   src/inventory_filter.h
+  src/item_menu_footer.cpp
+  src/item_menu_footer.h
   src/pch.h
   src/persistence.cpp
   src/persistence.h

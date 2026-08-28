@@ -12,8 +12,17 @@ inline constexpr REL::Version version{
     @PROJECT_VERSION_MINOR@u,
     @PROJECT_VERSION_PATCH@u,
 };
-inline constexpr REL::Version supported_runtime{1u, 6u, 1170u, 0u};
+inline constexpr REL::Version se_runtime{1u, 5u, 97u, 0u};
+inline constexpr REL::Version ae_runtime{1u, 6u, 1170u, 0u};
+
+[[nodiscard]] constexpr bool supports_runtime(const REL::Version runtime) noexcept {
+  return runtime == se_runtime || runtime == ae_runtime;
+}
+
+static_assert(supports_runtime(se_runtime));
+static_assert(supports_runtime(ae_runtime));
+static_assert(!supports_runtime(REL::Version{1u, 6u, 640u, 0u}));
+
 inline constexpr auto name = "@PROJECT_NAME@"sv;
 inline constexpr auto version_string = "@PROJECT_VERSION@"sv;
 }  // namespace back_pocket::plugin_version
-
