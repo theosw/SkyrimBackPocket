@@ -1237,15 +1237,15 @@ void switch_category(RE::GFxMovie& movie) {
   if (!movie.GetVariable(&inventory_lists, inventory_lists_path.data()) ||
       !inventory_lists.IsObject() ||
       !movie.GetVariable(&category_list, category_list_path.data()) || !category_list.IsObject() ||
-      !category_list.SetMember("selectedIndex", RE::GFxValue(static_cast<double>(destination)))) {
+      !select_category(inventory_lists, category_list, destination)) {
     notify("Back Pocket category could not be selected");
     return;
   }
 
-  static_cast<void>(inventory_lists.Invoke("showItemsList", nullptr, nullptr, 0));
   if (!pocket_selected) {
     use_mixed_inventory_layout(movie);
   }
+  request_invalidate(movie);
   queue_footer_refresh();
   notify(pocket_selected ? "Inventory" : "Back Pocket");
 }

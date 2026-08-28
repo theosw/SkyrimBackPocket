@@ -64,6 +64,9 @@ Prerequisites:
 - vcpkg through `VCPKG_ROOT`
 - CommonLibSSE-NG through `CommonLibSSEPath` or `BACK_POCKET_COMMONLIBSSE_NG_DIR`
 
+The 0.2.1 release was built against CommonLibSSE-NG commit
+`b93280e832f263dbef44e44cbe2936622a02f91a`. Use that revision to reproduce the release build.
+
 The resulting DLL supports Skyrim 1.5.97 with SKSE64 2.0.20 and Skyrim 1.6.1170 with SKSE64 2.2.6.
 Users need the Address Library package matching their game runtime.
 
@@ -88,6 +91,6 @@ category icon; MO2 metadata is left untouched.
 
 ## Planned validation and expansion
 
-1. Complete in-game validation on Skyrim 1.5.97 and validate the player gift-menu path.
+1. Complete in-game validation on Skyrim 1.5.97.
 2. Add optional DIII row-icon metadata and global presets.
 3. Evaluate per-instance identity for enchanted, tempered, renamed, or otherwise distinct items.
