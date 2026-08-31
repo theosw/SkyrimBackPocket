@@ -64,11 +64,14 @@ void on_skse_message(SKSE::MessagingInterface::Message* message) {
       inventory_ready &&
       disenchant_filter::install(current.pocket_state,
                                  current.configuration.hide_pocketed_from_disenchanting);
-  current.ready = inventory_ready && disenchant_ready;
+  current.ready = inventory_ready;
   logger::info("PLUGIN_READY inventory_filter={} disenchant_filter={}", inventory_ready,
                disenchant_ready);
   if (!current.ready) {
     RE::DebugNotification("Back Pocket failed to initialize; check BackPocket.log");
+  } else if (!disenchant_ready) {
+    RE::DebugNotification(
+        "Back Pocket loaded without disenchant protection; check BackPocket.log");
   }
 }
 } // namespace

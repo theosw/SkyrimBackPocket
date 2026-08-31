@@ -45,7 +45,8 @@ The hook uses Address Library IDs `50454` and `51359` with the same 1.5.97 and 1
 offsets as Essential Favorites. Installation happens at `kDataLoaded`, after Essential Favorites
 installs its hook at `kPostLoad`. Back Pocket captures the call target already present at the site
 and calls it from its thunk, so native quest protection and favorite protection remain in the chain.
-The call-site opcode is checked before patching, and an unfamiliar executable fails initialization.
+The call-site opcode is checked before patching. If the optional hook is unavailable, Back Pocket
+logs the error and continues with its inventory features.
 
 Container and Barter menus divide their category list into an external segment and a player segment.
 Back Pocket is appended only to the player segment. Gift menus show one inventory at a time, so the

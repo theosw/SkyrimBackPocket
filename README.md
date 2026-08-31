@@ -69,7 +69,7 @@ Prerequisites:
 - vcpkg through `VCPKG_ROOT`
 - CommonLibSSE-NG through `CommonLibSSEPath` or `BACK_POCKET_COMMONLIBSSE_NG_DIR`
 
-The 0.2.1 release was built against CommonLibSSE-NG commit
+The 0.2.2 build uses CommonLibSSE-NG commit
 `b93280e832f263dbef44e44cbe2936622a02f91a`. Use that revision to reproduce the release build.
 
 The resulting DLL supports Skyrim 1.5.97 with SKSE64 2.0.20 and Skyrim 1.6.1170 with SKSE64 2.2.6.
