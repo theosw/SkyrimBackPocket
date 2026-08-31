@@ -54,6 +54,7 @@ add_library(
   back_pocket_core
   STATIC
   include/back_pocket/category_policy.h
+  include/back_pocket/disenchant_policy.h
   include/back_pocket/form_id_policy.h
   include/back_pocket/input_binding.h
   include/back_pocket/pocket.h
@@ -73,6 +74,8 @@ add_library(
   SHARED
   src/config.cpp
   src/config.h
+  src/disenchant_filter.cpp
+  src/disenchant_filter.h
   src/inventory_filter.cpp
   src/inventory_filter.h
   src/item_menu_footer.cpp

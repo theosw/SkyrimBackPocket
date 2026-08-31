@@ -12,6 +12,7 @@ Highlight an item and press [b]B[/b]. It will disappear from SkyUI's regular cat
 [*]SkyUI's normal search, sorting, scrolling, and mixed-item layout.
 [*]An isolated satchel icon that does not replace your current icon pack.
 [*]The same player-side organization while storing, selling, or giving items.
+[*]Optional protection from accidentally disenchanting pocketed items.
 [*]A native SkyUI footer action with keyboard and controller glyphs.
 [*]No ESP, ESL, or Papyrus scripts.
 [/list]
@@ -27,6 +28,8 @@ The bindings can be changed in:
 The keyboard action uses a DirectInput scan code. The controller action uses a SkyUI gamepad key code; [code]280[/code] is LT and [code]-1[/code] disables it. LT is free in LoreRim's Keyboard Friendly and Complete Controller item-menu layouts. Pick Up As Junk uses the same default, and Gamepad++ assigns LT to Left Equip, so users combining those bindings must rebind or disable one of them.
 
 The same file contains an optional shortcut for switching between Back Pocket and your last regular category. Set [code]toggle_view_scan_code=47[/code] for [b]V[/b]; leave it at [code]0[/code] to keep it disabled.
+
+Pocketed enchanted items are hidden from the enchanter's Disenchant list by default. Pocketed unenchanted items remain available when applying a new enchantment. Set [code]hide_pocketed_from_disenchanting=false[/code] under [code][menus][/code] to restore the complete Disenchant list. Restart Skyrim after changing the setting.
 
 Pocket actions are suppressed while typing in SkyUI's search field, using an internal item dialog, or viewing the Console over an item menu.
 
@@ -51,7 +54,7 @@ Install with Mod Organizer 2 or Vortex. No special conflict rules should be requ
 [size=5][b]LIMITATIONS[/b][/size]
 
 [list]
-[*]Back Pocket appears in the main inventory and on the player side of container, barter, and gift menus. External inventories and crafting menus are unchanged.
+[*]Back Pocket appears in the main inventory and on the player side of container, barter, and gift menus. External inventories are unchanged. The optional disenchant filter is the only crafting-menu integration.
 [*]Membership is tracked by base form, so stacks or variants sharing a base form share their pocket state.
 [*]Back Pocket observes configured inputs without consuming other actions assigned to the same key.
 [/list]

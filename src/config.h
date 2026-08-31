@@ -15,6 +15,7 @@ struct settings {
   std::optional<std::uint32_t> controller_toggle_item_key_code =
       default_controller_toggle_item_key_code;
   bool show_notifications = true;
+  bool hide_pocketed_from_disenchanting = true;
 };
 
 [[nodiscard]] settings load();

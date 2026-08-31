@@ -34,6 +34,19 @@ recalculates the maximum scroll position, and repairs selection through SkyUI's 
 SKSE's inventory-entry callback annotates item-menu rows with `backPocketFormId`. The filter also
 accepts SkyUI's `formId` field as a compatibility fallback.
 
+## Disenchant filtering
+
+Skyrim excludes quest objects while building the native Disenchant candidate list. Back Pocket
+hooks that `InventoryEntryData::IsQuestObject` call, invokes the existing target first, and extends
+a false result only when the item is enchanted and its base form is pocketed. The item never becomes
+a Disenchant row, while unenchanted pocketed items remain available when applying an enchantment.
+
+The hook uses Address Library IDs `50454` and `51359` with the same 1.5.97 and 1.6.x call-site
+offsets as Essential Favorites. Installation happens at `kDataLoaded`, after Essential Favorites
+installs its hook at `kPostLoad`. Back Pocket captures the call target already present at the site
+and calls it from its thunk, so native quest protection and favorite protection remain in the chain.
+The call-site opcode is checked before patching, and an unfamiliar executable fails initialization.
+
 Container and Barter menus divide their category list into an external segment and a player segment.
 Back Pocket is appended only to the player segment. Gift menus show one inventory at a time, so the
 category is omitted when the displayed inventory is not the player's. Any unfamiliar category
@@ -103,7 +116,8 @@ ordinary load-order movement; unresolved forms are dropped.
   explicitly restricted to those two versions; 1.5.97 still needs beta in-game validation.
 - Keyboard and separately configurable controller item actions; the optional category shortcut is
   keyboard-only.
-- Player views in Inventory, Container, Barter, and Gift menus only; crafting menus are unchanged.
+- Player views in Inventory, Container, Barter, and Gift menus. An optional filter also hides
+  pocketed rows from the enchanter's Disenchant list; other crafting menus are unchanged.
 - Membership is base-form-wide, not per-instance.
 - No MCM; configuration is an INI and feedback uses notifications plus SkyUI's native item-menu
   footer where available.

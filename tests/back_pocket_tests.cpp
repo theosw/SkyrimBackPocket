@@ -1,4 +1,5 @@
 #include "back_pocket/category_policy.h"
+#include "back_pocket/disenchant_policy.h"
 #include "back_pocket/form_id_policy.h"
 #include "back_pocket/input_binding.h"
 #include "back_pocket/pocket.h"
@@ -83,6 +84,18 @@ TEST_CASE("category policy distinguishes player and external inventory flags") {
   CHECK_FALSE(is_pocket_category(player_inventory_filter_mask));
 }
 
+TEST_CASE("disenchant policy preserves native protection and adds pocketed enchanted items") {
+  using namespace back_pocket::disenchant_policy;
+
+  CHECK(should_protect(true, false, false));
+  CHECK(should_protect(true, true, true));
+  CHECK(should_protect(false, true, true));
+
+  CHECK_FALSE(should_protect(false, false, true));
+  CHECK_FALSE(should_protect(false, true, false));
+  CHECK_FALSE(should_protect(false, false, false));
+}
+
 TEST_CASE("saved state round trips and rejects malformed payloads") {
   const std::array forms{0x01000001u, 0xFE001234u};
   const auto encoded = back_pocket::saved_state::encode(forms);
@@ -141,15 +154,15 @@ TEST_CASE("controller chords and matching keyboard events do not double toggle")
 TEST_CASE("leaving the player tab remembers only Back Pocket") {
   using namespace back_pocket::tab_transition_policy;
 
-  const plan pocket = after_tab_press(external_segment, player_segment, external_segment, true,
-                                      false);
+  const plan pocket =
+      after_tab_press(external_segment, player_segment, external_segment, true, false);
   CHECK(pocket.update_pending);
   CHECK(pocket.pending_value);
   CHECK(pocket.normalize_external);
   CHECK_FALSE(pocket.restore_pocket);
 
-  const plan regular = after_tab_press(external_segment, player_segment, external_segment, false,
-                                       true);
+  const plan regular =
+      after_tab_press(external_segment, player_segment, external_segment, false, true);
   CHECK(regular.update_pending);
   CHECK_FALSE(regular.pending_value);
   CHECK_FALSE(regular.normalize_external);
@@ -159,15 +172,15 @@ TEST_CASE("leaving the player tab remembers only Back Pocket") {
 TEST_CASE("returning to the player tab restores and consumes a pending pocket view") {
   using namespace back_pocket::tab_transition_policy;
 
-  const plan restore = after_tab_press(player_segment, external_segment, player_segment, false,
-                                       true);
+  const plan restore =
+      after_tab_press(player_segment, external_segment, player_segment, false, true);
   CHECK(restore.update_pending);
   CHECK_FALSE(restore.pending_value);
   CHECK_FALSE(restore.normalize_external);
   CHECK(restore.restore_pocket);
 
-  const plan regular = after_tab_press(player_segment, external_segment, player_segment, false,
-                                       false);
+  const plan regular =
+      after_tab_press(player_segment, external_segment, player_segment, false, false);
   CHECK(regular.update_pending);
   CHECK_FALSE(regular.pending_value);
   CHECK_FALSE(regular.normalize_external);
@@ -177,8 +190,8 @@ TEST_CASE("returning to the player tab restores and consumes a pending pocket vi
 TEST_CASE("ignored and unrelated tab presses preserve pending state") {
   using namespace back_pocket::tab_transition_policy;
 
-  const plan ignored = after_tab_press(player_segment, external_segment, external_segment, false,
-                                       true);
+  const plan ignored =
+      after_tab_press(player_segment, external_segment, external_segment, false, true);
   CHECK_FALSE(ignored.update_pending);
   CHECK_FALSE(ignored.normalize_external);
   CHECK_FALSE(ignored.restore_pocket);

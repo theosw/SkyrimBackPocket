@@ -39,6 +39,11 @@ default; set `toggle_view_scan_code=47` to bind it to `V`. A value of `0` disabl
 Hotkey actions are suppressed while typing in SkyUI's search field, using an internal SkyUI item
 dialog, or viewing the Console over an item menu.
 
+Pocketed enchanted items are hidden from the enchanter's Disenchant list by default. Pocketed
+unenchanted items remain available in the Item list when applying a new enchantment. Set
+`hide_pocketed_from_disenchanting=false` under `[menus]` in `BackPocket.ini` to show them in the
+Disenchant list again. Back Pocket reads this setting when Skyrim starts.
+
 ## Design
 
 Back Pocket reserves an unused item-menu filter bit and injects a player-side category for it. Two

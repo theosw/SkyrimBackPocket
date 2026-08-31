@@ -1,6 +1,7 @@
 #include "pch.h"
 
 #include "config.h"
+#include "disenchant_filter.h"
 #include "inventory_filter.h"
 #include "persistence.h"
 #include "plugin_version.h"
@@ -57,8 +58,15 @@ void on_skse_message(SKSE::MessagingInterface::Message* message) {
   }
 
   current.configuration = config::load();
-  current.ready = inventory_filter::install(current.pocket_state, current.configuration);
-  logger::info("PLUGIN_READY inventory_filter={}", current.ready);
+  const bool inventory_ready =
+      inventory_filter::install(current.pocket_state, current.configuration);
+  const bool disenchant_ready =
+      inventory_ready &&
+      disenchant_filter::install(current.pocket_state,
+                                 current.configuration.hide_pocketed_from_disenchanting);
+  current.ready = inventory_ready && disenchant_ready;
+  logger::info("PLUGIN_READY inventory_filter={} disenchant_filter={}", inventory_ready,
+               disenchant_ready);
   if (!current.ready) {
     RE::DebugNotification("Back Pocket failed to initialize; check BackPocket.log");
   }

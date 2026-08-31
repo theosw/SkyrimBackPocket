@@ -69,6 +69,8 @@ settings load() {
                                               default_toggle_view_scan_code, true),
       .controller_toggle_item_key_code = read_gamepad_key_code(),
       .show_notifications = read_bool(L"display", L"show_notifications", true),
+      .hide_pocketed_from_disenchanting =
+          read_bool(L"menus", L"hide_pocketed_from_disenchanting", true),
   };
   if (result.toggle_view_scan_code != disabled_scan_code &&
       result.toggle_item_scan_code == result.toggle_view_scan_code) {
@@ -77,12 +79,13 @@ settings load() {
     result.toggle_view_scan_code = disabled_scan_code;
   }
   logger::info("configuration loaded: toggle_item={}, controller_toggle_item={}, toggle_view={}, "
-               "notifications={}",
+               "notifications={}, hide_from_disenchanting={}",
                result.toggle_item_scan_code,
                result.controller_toggle_item_key_code.has_value()
                    ? static_cast<int>(*result.controller_toggle_item_key_code)
                    : -1,
-               result.toggle_view_scan_code, result.show_notifications);
+               result.toggle_view_scan_code, result.show_notifications,
+               result.hide_pocketed_from_disenchanting);
   return result;
 }
 } // namespace back_pocket::config
